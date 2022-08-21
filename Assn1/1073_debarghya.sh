@@ -5,11 +5,11 @@ greet() {
 
   h=`date +%H`
   if [ $h -lt 12 ]; then
-    echo Good morning
+    echo "Good Morning"
   elif [ $h -lt 18 ]; then
-    echo Good afternoon
+    echo "Good Afternoon"
   else
-    echo Good evening
+    echo "Good Evening"
   fi
 }
 
