@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 read -p "Enter Date 1 :- " date1
 read -p "Enter Date 2 :- " date2
