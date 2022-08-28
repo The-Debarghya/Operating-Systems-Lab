@@ -19,7 +19,9 @@ month=${month%/*}
 
 _dow2=$(date --date="$month/$day/$year" '+%A')
 
-if [ $_dow1 -eq $_dow2 ]; then
+echo $_dow1
+echo $_dow2
+if [[ $_dow1 == $_dow2 ]]; then
 	echo "Days are equal"
 else
 	echo "Days are not equal"
