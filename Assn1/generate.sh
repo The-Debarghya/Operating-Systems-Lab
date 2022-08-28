@@ -16,6 +16,8 @@ for (( i = 1; i < 8; i++ )); do
   echo "> $question" >> $report
   echo "" >> $report
 
+  echo "### Answer $i" >> $report
+  echo "" >> $report
   answer_file="q${i}.sh"
   echo "> \`\`\`bash" >> $report
   while read line; do
@@ -23,10 +25,17 @@ for (( i = 1; i < 8; i++ )); do
   done < $answer_file
   echo "> \`\`\`" >> $report
   echo "" >> $report
-  echo "![Question${i}](./${i}.png)" >> $report
+  if [[ $i -eq 6 ]]; then
+    echo "![Question${i}](./${i}.png){ width=50% }" >> $report
+  elif [[ $i -ge 4 ]]; then
+    echo "![Question${i}](./${i}.png){ width=75% }" >> $report
+  else
+    echo "![Question${i}](./${i}.png)" >> $report
+  fi
   echo "" >> $report
   echo "" >> $report
   echo "" >> $report
 done
 
 pandoc -s --verbose --wrap=preserve -V geometry:paperheight=16in -V geometry:margin=.25in -V headersize=12pt --from markdown $report --output "${report}.pdf"
+rm $report
