@@ -3,7 +3,6 @@ echo "Filename to search in:"
 read filename
 echo "Word to search:"
 read word
-
 if grep -Fqw $word $filename
 then
   echo "The number of occurrences of ($word):"

@@ -5,7 +5,6 @@ echo "Enter the value of variable 2"
 read uv2
 echo "$uv1, $uv2"
 echo "$uv2 and $uv1"
-
 echo "Reverse of 1st number:"
 echo $uv1 | rev
 echo "Reverse of 2nd number:"

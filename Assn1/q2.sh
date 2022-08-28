@@ -1,5 +1,4 @@
 #!/bin/bash
-
 echo "Enter the path to the file"
 read file_path
 if [[ -f "$file_path" ]]; then
