@@ -17,13 +17,13 @@ for (( i = 1; i < 8; i++ )); do
   echo "" >> $report
 
   answer_file="q${i}.sh"
-  echo "\`\`\`bash" >> $report
+  echo "> \`\`\`bash" >> $report
   while read line; do
-    echo "$line" >> $report
+    echo "> $line" >> $report
   done < $answer_file
-  echo "\`\`\`" >> $report
+  echo "> \`\`\`" >> $report
   echo "" >> $report
-  echo "![Screenshot](./${i}.png)" >> $report
+  echo "![Question${i}](./${i}.png)" >> $report
   echo "" >> $report
   echo "" >> $report
   echo "" >> $report

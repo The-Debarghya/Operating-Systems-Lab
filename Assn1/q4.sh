@@ -15,7 +15,8 @@ clear(){
     exit 2
   fi
 }
-if [ "$#" -eq 0 ] || [[ ( ! $1 =~ ^(--help|-h|-help)$) && ( ! -f "$1") && ( ! $1 =~ ^(--clear|-c|-clear)$) ]] ; then
+if [ "$#" -eq 0 ] || [[ ( ! $1 =~ ^(--help|-h|-help)$) && ( ! -f "$1") && 
+                       ( ! $1 =~ ^(--clear|-c|-clear)$) ]] ; then
   echo "./q4.sh: Missing operand
 Try ./q4.sh --help for more information."
   exit 2
