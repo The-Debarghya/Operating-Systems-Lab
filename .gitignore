@@ -4,3 +4,9 @@ log*
 
 #Questions/Reports
 *.pdf
+
+#Image files
+*.png
+*.jpg
+*.jpeg
+*.gif
