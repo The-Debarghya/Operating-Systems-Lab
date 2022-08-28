@@ -1,0 +1,6 @@
+#logs/logfiles
+log* 
+*.txt
+
+#Questions/Reports
+*.pdf
