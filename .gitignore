@@ -10,3 +10,7 @@ log*
 *.jpg
 *.jpeg
 *.gif
+
+#Config files
+.vscode/
+*.json
