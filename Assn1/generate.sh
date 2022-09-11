@@ -37,5 +37,5 @@ for (( i = 1; i < 8; i++ )); do
   echo "" >> $report
 done
 
-pandoc -s --verbose --wrap=preserve -V geometry:paperheight=16in -V geometry:margin=.25in -V headersize=12pt --from markdown $report --output "${report}.pdf"
-rm $report
+pandoc -s --verbose --wrap=preserve -V geometry:paperheight=16in -V geometry:margin=.25in -V headersize=18pt --from markdown $report --output "${report}.pdf" | while IFS= read -r line; do printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$line"; done
+
