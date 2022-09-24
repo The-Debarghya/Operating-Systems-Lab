@@ -28,7 +28,7 @@ int main(int argc, char** argv){
     total = 0;
     if (argc != 3){
 		printf("%s: Invalid Arguments\nUsage: %s <producer_count> <consumer_count>\n", argv[0], argv[0]);
-		exit(1);
+		exit(EXIT_FAILURE);
     }
     int P, C;
 	P = atoi(argv[1]);
@@ -36,7 +36,7 @@ int main(int argc, char** argv){
     requiredmemory *shared = mmap(NULL, sizeof(shared), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     if (shared == MAP_FAILED){
         printf("Memory map failed");
-        exit(1);
+        exit(EXIT_FAILURE);
     }
     shared->count = 0;
 	shared->start = 0;
@@ -83,7 +83,7 @@ int main(int argc, char** argv){
 	}
 	sleep(1);
 	printf("Total : %d\n", shared->total);
-	exit(0);
+	exit(EXIT_SUCCESS);
     
     __fork_error_handler_c: {
         perror("Unexpected error occurred while forking consumers\n");
@@ -100,7 +100,7 @@ int main(int argc, char** argv){
 	    exit(1);
     }
     __producer: {
-        srand(clock());
+        srand(time(NULL));
         count = PRODUCER_MIN + rand() % PRODUCER_RANGE;
         int cnt = count;
 	    while (cnt--){
