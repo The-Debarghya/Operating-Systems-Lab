@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <unistd.h>
 #include <time.h>
 #include <semaphore.h>
@@ -89,7 +90,7 @@ int main(int argc, char** argv){
         perror("Unexpected error occurred while forking consumers\n");
 	    for (--c; c >= 0; c--)
 		    kill(consumers[c], SIGKILL);
-	    exit(1);
+	    exit(EXIT_FAILURE);
     }
     __fork_error_handler_p: {
         perror("Unexpected error occurred while forking producers\n");
@@ -97,7 +98,7 @@ int main(int argc, char** argv){
 		    kill(consumers[c], SIGKILL);
 	    for (--p; p >= 0; p--)
 		    kill(producers[p], SIGKILL);
-	    exit(1);
+	    exit(EXIT_FAILURE);
     }
     __producer: {
         srand(time(NULL));
@@ -118,7 +119,7 @@ int main(int argc, char** argv){
     __consumer: {
         signal(SIGQUIT, consumer_handler);
 	    count = 0;
-	    while (1){
+	    while (true){
 		    unsigned char num = 0;
 		    sem_wait(full);
 		    sem_wait(mutex);
