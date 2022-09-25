@@ -51,7 +51,7 @@ int main(int argc, char** argv){
     sem_init(mutex, 1, 1);
     pid_t producers[P], consumers[C];
     int p, c;
-    for (c = 0; c < C; c++)   {
+    for (c = 0; c < C; c++){
         pid_t pid = fork();
         if (pid < 0)  {
             goto __fork_error_handler_c;
