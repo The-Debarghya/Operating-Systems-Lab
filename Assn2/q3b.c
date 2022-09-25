@@ -47,6 +47,7 @@ int main(int argc, char** argv){
             read(fd, buffer, BUFF_LEN);
             close(fd);
             printf("%s\n", buffer);
+            if(strcmp(buffer, "EOF") == 0) break;
         }
     }else{
         while(true){
@@ -55,5 +56,6 @@ int main(int argc, char** argv){
             write(fd, buffer, strlen(buffer)+1);
             close(fd);
         }
-    }    
+    }
+    return 0;
 }

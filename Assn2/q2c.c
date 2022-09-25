@@ -10,7 +10,8 @@
 
 void display(unsigned int t, sem_t* mutex){
     for (int i = 0; i < 10; i++){
-        
+        //if(i != 0)  
+        sem_wait(mutex);
         printf("Parent Process ID : %d, Child Process ID : %d, Iteration no.: %d\n", getppid(), getpid(), i+1);
         sleep(t);
         sem_post(mutex);
@@ -22,7 +23,7 @@ int main(int argc, char** argv){
     pid_t pidx = -1, pidy = -1;
     unsigned int shared = 0;
     sem_unlink(MUTEX);
-    if((mutex = sem_open(MUTEX, O_CREAT, 0666, 0)) == SEM_FAILED){
+    if((mutex = sem_open(MUTEX, O_CREAT, 0666, 2)) == SEM_FAILED){
         printf("Error while opening semaphore!");
         exit(EXIT_FAILURE);
     }
@@ -36,7 +37,6 @@ int main(int argc, char** argv){
             printf("Error while forking!");
             exit(EXIT_FAILURE);
         }else if (pidy == 0){
-            sem_wait(mutex);
             display(1, mutex);
         }else{
             wait(NULL);
