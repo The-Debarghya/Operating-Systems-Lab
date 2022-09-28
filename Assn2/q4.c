@@ -28,8 +28,8 @@ void consumer_handler(int sig){
 int main(int argc, char** argv){
     total = 0;
     if (argc != 3){
-		printf("%s: Invalid Arguments\nUsage: %s <producer_count> <consumer_count>\n", argv[0], argv[0]);
-		exit(EXIT_FAILURE);
+        printf("%s: Invalid Arguments\nUsage: %s <producer_count> <consumer_count>\n", argv[0], argv[0]);
+        exit(EXIT_FAILURE);
     }
     int P, C;
 	P = atoi(argv[1]);
@@ -40,12 +40,12 @@ int main(int argc, char** argv){
         exit(EXIT_FAILURE);
     }
     shared->count = 0;
-	shared->start = 0;
-	shared->total = 0;
-	sem_t *full, *empty, *mutex;
-	empty = &(shared->empty);
-	full = &(shared->full);
-	mutex = &(shared->mutex);
+    shared->start = 0;
+    shared->total = 0;
+    sem_t *full, *empty, *mutex;
+    empty = &(shared->empty);
+    full = &(shared->full);
+    mutex = &(shared->mutex);
     sem_init(empty, 1, BUFF_LEN);
     sem_init(full, 1, 0);
     sem_init(mutex, 1, 1);
