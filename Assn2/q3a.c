@@ -72,9 +72,10 @@ int main(int argc, char** argv){
             close(fds[i][WRITE_END]);
         }
         int fd = fds[id][READ_END];
-        while (1){
+        while (id+1){
             read(fd, buffer, BUFF_LEN);
             printf("Station %d: %s\n", id+1, buffer);
+            id--;
         }        
     }    
     

@@ -34,7 +34,7 @@ int main(int argc, char** argv){
     int P, C;
 	P = atoi(argv[1]);
 	C = atoi(argv[2]);
-    requiredmemory *shared = mmap(NULL, sizeof(shared), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
+    requiredmemory *shared = mmap(NULL, sizeof(requiredmemory), PROT_READ | PROT_WRITE, MAP_SHARED | MAP_ANONYMOUS, -1, 0);
     if (shared == MAP_FAILED){
         printf("Memory map failed");
         exit(EXIT_FAILURE);
