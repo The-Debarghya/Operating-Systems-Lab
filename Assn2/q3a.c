@@ -42,7 +42,7 @@ int main(int argc, char** argv){
             close(fds[id][READ_END]);
         }
     }
-    signal(SIGINT, __broadcast_signal_handler);
+    //signal(SIGINT, __broadcast_signal_handler);
     srand(time(NULL));
     while (flag) {
         sleep(rand() % 2);
@@ -58,16 +58,16 @@ int main(int argc, char** argv){
         
     }
     for (int i = 0; i < n; i++){
-        kill(stations[i], SIGTERM);
+        //kill(stations[i], SIGTERM);
+        wait(NULL);
     }
-    sleep(1);
     printf("Forecast end.");
     fflush(stdout);
     return 0;
 
     __listen: {
-        signal(SIGINT, __listener_handler);
-        signal(SIGTERM, __listener_handler);
+        //signal(SIGINT, __listener_handler);
+        //signal(SIGTERM, __listener_handler);
         for (int i = 0; i < id; i++){
             close(fds[i][WRITE_END]);
         }
