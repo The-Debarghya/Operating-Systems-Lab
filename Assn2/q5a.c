@@ -86,8 +86,6 @@ int main(int argc, char** argv){
         int c = count;
         int line = 0;
         while(c--){
-            struct timespec sltime = {0, rand()%150 << 10};
-            nanosleep(&sltime, NULL);
 		    line++;
 		    char buff[BUFF_LEN];
 		    sem_wait(write);

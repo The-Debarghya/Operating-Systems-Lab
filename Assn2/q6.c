@@ -9,39 +9,37 @@
 #define THINKING 2
 #define HUNGRY 1
 #define EATING 0
-#define LEFT (phnum + N-1) % N
-#define RIGHT (phnum + 1) % N
 
 int state[N];
 int phil[N];
-sem_t *mutex;
+sem_t mutex;
 sem_t S[N];
 void test(int phnum){
-	if (state[phnum] == HUNGRY && state[LEFT] != EATING	&& state[RIGHT] != EATING) {
+	if (state[phnum] == HUNGRY && state[(phnum + N-1) % N] != EATING	&& state[(phnum + 1) % N] != EATING) {
 		state[phnum] = EATING;
 		sleep(1);
-		printf("Philosopher %d takes chopstick %d and %d\n",	phnum + 1, LEFT + 1, phnum + 1);
+		printf("Philosopher %d takes chopstick %d and %d\n",	phnum + 1, (phnum + N-1) % N + 1, phnum + 1);
 		printf("Philosopher %d is Eating\n", phnum + 1);
 		sem_post(&S[phnum]);
 	}
 }
 void take_chopstick(int phnum){
-	sem_wait(mutex);
+	sem_wait(&mutex);
 	state[phnum] = HUNGRY;
 	printf("Philosopher %d is Hungry\n", phnum + 1);
 	test(phnum);
-	sem_post(mutex);
+	sem_post(&mutex);
 	sem_wait(&S[phnum]);
 	sleep(1);
 }
 void put_chopstick(int phnum){
-	sem_wait(mutex);
+	sem_wait(&mutex);
 	state[phnum] = THINKING;
-	printf("Philosopher %d putting chopstick %d and %d down\n", phnum + 1, LEFT + 1, phnum + 1);
+	printf("Philosopher %d putting chopstick %d and %d down\n", phnum + 1, (phnum + N-1) % N + 1, phnum + 1);
 	printf("Philosopher %d is thinking\n", phnum + 1);
-	test(LEFT);
-	test(RIGHT);
-	sem_post(mutex);
+	test((phnum + N-1) % N);
+	test((phnum + 1) % N);
+	sem_post(&mutex);
 }
 void* philosopher(void* num){
 	while (true) {
@@ -58,7 +56,7 @@ int main(){
     }
 	int i;
 	pthread_t thread_id[N];
-	sem_init(mutex, 0, 1);
+	sem_init(&mutex, 0, 1);
 	for (i = 0; i < N; i++)
 		sem_init(&S[i], 0, 0);
 	for (i = 0; i < N; i++) {
